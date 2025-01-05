@@ -3,7 +3,6 @@ on:
   push:
     branches: [main]
 
-  # to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -13,11 +12,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Add remote 
+      - name: Add remote
         env:
-          HF: ${{ secrets.HF }}
-        run: git remote add space https://saaib:$HF@huggingface.co/spaces/saaib/HG
+          HG: ${{ secrets.HG }}
+        run: |
+          git remote add space https://saaib:${HG}@huggingface.co/spaces/saaib/HG
+          git remote -v  # Verify the remote configuration
       - name: Push to hub
         env:
-          HF: ${{ secrets.HF }}
-        run: git push --force https://saaib:$HF@huggingface.co/spaces/saaib/HG main
+          HG: ${{ secrets.HG }}
+        run: git push --force space main

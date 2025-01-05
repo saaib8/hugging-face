@@ -20,5 +20,5 @@ jobs:
           git remote -v  # Verify the remote configuration
       - name: Push to hub
         env:
-          HG: ${{ secrets.HG }}
+          HG: ${{ secrets.HG }} 
         run: git push --force space main
